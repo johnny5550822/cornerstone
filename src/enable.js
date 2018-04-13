@@ -34,11 +34,12 @@ function hasImageOrLayers (enabledElement) {
  *
  * @param {HTMLElement} element An HTML Element enabled for Cornerstone
  * @param {Object} options Options for the enabledElement
+ * @param {Canvas} canvasInput An HTML canvas to draw the image to
  *
  * @return {void}
  * @memberof Enable
  */
-export default function (element, options) {
+export default function (element, options, canvasInput = null) {
   if (element === undefined) {
     throw new Error('enable: parameter element cannot be undefined');
   }
@@ -58,8 +59,8 @@ export default function (element, options) {
       delete options.renderer;
     }
   }
-
-  const canvas = getCanvas(element);
+  
+  const canvas = (canvasInput === null) ? getCanvas(element) : canvasInput;
 
   const enabledElement = {
     element,
